@@ -1,0 +1,101 @@
+
+html, body, #root {
+    background: transparent!important;
+    height: 100%;
+    overflow: hidden;
+}
+
+.inventory-wrapper {
+    display: flex;
+    gap: 1vh;
+    justify-content: center;
+    align-items: flex-start;
+    height: 70%;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    left: 0;
+    color: white;
+    .other-inventories {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        overflow: auto;
+        height: 100%;
+        .inventory-window {
+            min-width: calc(6*8vh + (4*0.5vh))!important;
+            .inventory-grid-container {
+                grid-template-columns: repeat(6, 8vh)!important;
+                .item {
+                    height: 8vh!important;
+                    width: 8vh!important;
+                }
+            }
+        }
+    }
+    .inventory-control {
+        width: 40vh;
+        background: #101011f2;
+        border-radius: 0.5vh;
+        padding: 0.5vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1vh;
+        padding: 1vh;
+        .image {
+            width: 20vh;
+            height: 20vh;
+        }
+    }
+}
+
+.inventory-window {
+    position: relative;
+    background: #101011f2;
+    border-radius: 0.5vh;
+    padding: 0.5vh;
+    .inventory-grid-container {
+        width: fit-content;
+        display: grid;
+        grid-template-columns: repeat(5, 9vh);
+        gap: 0.2vh;
+        .item {
+            height: 9vh;
+            width: 9vh;
+            text-align: center;
+            border-radius: 0.5vh;
+            position: relative;
+            .item-weight {
+                position: absolute;
+                right: 0;
+                top: 0;
+                padding: 0.1vh 0.5vh;
+                font-size: 1.2vh;
+                text-shadow: 0px 0px 3px black;
+            }
+            .item-amount {
+                position: absolute;
+                left: 0;
+                top: 0;
+                padding: 0.1vh 0.5vh;
+                font-size: 1.2vh;
+                text-shadow: 0px 0px 3px black;
+            }
+            .item-name {
+                position: absolute;
+                bottom: 0;
+                text-align: center;
+                width: 100%;
+                font-size: 1.1vh;
+                background: #00000061;
+                border-radius: 0 0 0.5vh 0.5vh;
+            }
+        }
+    }       
+}
