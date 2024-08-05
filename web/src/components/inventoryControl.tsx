@@ -38,7 +38,7 @@ const InventoryControl = () => {
                     </p>
                     {
                         current.type == 'player' && currentItem?.buttons && 
-                        <div className="w-full">
+                        <div className="w-full text-start">
                             {
                                 currentItem.buttons.map((item, index) => (
                                     <Button 

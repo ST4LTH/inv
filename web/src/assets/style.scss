@@ -5,12 +5,37 @@ html, body, #root {
     overflow: hidden;
 }
 
+/* width */
+::-webkit-scrollbar {
+    height: 0;
+    width: 0px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+
 .inventory-wrapper {
+    box-shadow: inset 0 0 20vh #0a0a0c;
+    background: #282828c0!important;
     display: flex;
     gap: 1vh;
     justify-content: center;
     align-items: flex-start;
-    height: 70%;
+    height: 100%;
+    padding-top: 15vh;
     -webkit-user-select: none;
     -moz-user-select: none;
     user-select: none;
@@ -40,7 +65,10 @@ html, body, #root {
     }
     .inventory-control {
         width: 40vh;
-        background: #101011f2;
+        background: #373737f0;
+        text-align: center;
+        box-shadow: inset 0 0 10vh #000000a6;
+        border: 1px solid transparent;
         border-radius: 0.5vh;
         padding: 0.5vh;
         display: flex;
@@ -55,22 +83,47 @@ html, body, #root {
     }
 }
 
+.inventory-container {
+    display: flex;
+    .inventory-tabs {
+        background: #323232f0;
+        text-align: center;
+        box-shadow: inset 0 0 2vh #000000a6;
+        border: transparent 1px solid;
+        .tab {
+            border-color: #4a4a4a;
+            border: transparent 1px solid;
+            transition: all 200ms;
+        }
+        .tab.active {
+            box-shadow: inset 0 0 2vh #000000a6;
+        }
+    }
+}
 .inventory-window {
     position: relative;
-    background: #101011f2;
-    border-radius: 0.5vh;
     padding: 0.5vh;
+    background: #353535f0;
+    transition: all 500ms;
+    text-align: center;
+    box-shadow: inset 0 0 10vh #000000a6;
+    border: transparent 1px solid;
     .inventory-grid-container {
         width: fit-content;
         display: grid;
         grid-template-columns: repeat(5, 9vh);
         gap: 0.2vh;
+        height: fit-content;
+        max-height: 6*9.2vh;
+        overflow: scroll;
         .item {
             height: 9vh;
             width: 9vh;
             text-align: center;
-            border-radius: 0.5vh;
             position: relative;
+            box-shadow: inset 0 0 7vh #000000b5;
+            background-color: #3e3e3eb3;
+            border: transparent 1px solid;
             .item-weight {
                 position: absolute;
                 right: 0;

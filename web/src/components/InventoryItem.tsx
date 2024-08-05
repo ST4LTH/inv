@@ -33,7 +33,7 @@ const InventoryItem: React.FC<{
     }),
   }), [item, slot, inventory]);
 
-  const opacity = isDragging ? 0.5 : 1;
+  const opacity = isDragging ? 0.7 : 1;
 
   const onClick = () => {
     setCurrent(item ? { type: inventory.type, ...item } : null);
@@ -41,14 +41,14 @@ const InventoryItem: React.FC<{
 
   // Ensure the item and Items[item.item] exist before rendering
   if (!item || !Items[item.item]) {
-    return <div className='item' ref={dragRef} style={{ opacity }}> {/* Empty slot */} </div>;
+    return <div className='item rounded' ref={dragRef} style={{ opacity }}> {/* Empty slot */} </div>;
   }
 
   return (
     <div
       onClick={onClick}
       ref={dragRef}
-      className='item'
+      className='item rounded'
       style={{
         opacity,
         backgroundImage: `url(./images/${item.item}.png)`,

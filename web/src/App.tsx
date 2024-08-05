@@ -20,7 +20,7 @@ const App: React.FC = () => {
     setGroundItems,
     insertInventory
   } = useInvStore();
-  const [ open, setOpen ] = useState<boolean>(true)
+  const [ open, setOpen ] = useState<boolean>(false)
   const { 
     setItems
   } = useItemsStore();

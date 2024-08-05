@@ -1,4 +1,8 @@
 
+-- NUI Callbacks
+
+-- Callback for moving items, checks and updates inventorys/ground
+
 RegisterNUICallback('moveItem', function(data)
     local item = data.item.item
     if data.targetInv.id == 'ground' then
@@ -24,6 +28,8 @@ RegisterNUICallback('moveItem', function(data)
     end
 end)
 
+-- Callback for swaping items, checks and updates inventorys/ground
+
 RegisterNUICallback('swapItem', function(data, cb)
     deBug('swapItem')
     local item = data.item.item
@@ -45,6 +51,8 @@ RegisterNUICallback('swapItem', function(data, cb)
         return
     end
 end)
+
+-- Callback for closing inventory
 
 RegisterNUICallback('close', function()
     SetNuiFocus(false, false)

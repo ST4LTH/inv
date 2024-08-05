@@ -1,4 +1,6 @@
 
+-- Function to get correct inventory from data.id
+
 getInventory = function (data)
     if (data.id == "ground") then
         return config.ground
@@ -18,6 +20,8 @@ getInventory = function (data)
     end
 end
 
+-- Function to get empty slot in a itemList/inventory
+
 getEmptySlot = function (items)
     local slot = -1
     for i, item in pairs(items) do
@@ -29,9 +33,13 @@ getEmptySlot = function (items)
     return slot
 end
 
+-- Just Debug print, used this to know what errors were for the Inventory
+
 deBug = function(text, ...)
     print('Inventory: Client Debug ', text, ...)
 end
+
+-- Animation for when picking up/dropping items on ground
 
 pickupAnim = function()
 	while not HasAnimDictLoaded('random@domestic') do
@@ -43,6 +51,8 @@ pickupAnim = function()
 	TaskPlayAnim(PlayerPedId(), 'random@domestic', 'pickup_low', 2.0, -1, -1, 0, 0, false, false, false)
 end
 
+-- Generates ID for items
+
 generateId = function()
     local id = math.random(1, 99999999999)
 
@@ -52,8 +62,10 @@ generateId = function()
     return random
 end
 
+-- Loads model 
+
 loadModel = function(model)
-    if not IsModelValid(model) then return deBug(('Inventory: Client %s model not found'):format(model)) end
+    if not IsModelValid(model) then return end
     RequestModel(model)
     RequestCollisionForModel(model)
 
@@ -64,20 +76,18 @@ loadModel = function(model)
     SetModelAsNoLongerNeeded(model)
 end
 
-spawnObject = function(Data, Callback)
-    local Model = (type(Data.Model) == 'number' and Data.Model or GetHashKey(Data.Model))
-
-    if not IsModelValid(Model) or not IsModelInCdimage(Model) then 
-        Model = GetHashKey('prop_michael_backpack')
+spawnObject = function(data, cb)
+    local model = (type(data.Model) == 'number' and data.Model or GetHashKey(data.Model))
+    if not IsModelValid(model) or not IsModelInCdimage(model) then 
+        model = GetHashKey('prop_michael_backpack')
     end
 
     CreateThread(function()
-        loadModel(Model)
+        loadModel(model)
 
-        Object = CreateObject(Model, Data.Coords.x, Data.Coords.y, Data.Coords.z, false, true, true)
-
-        if Callback ~= nil then
-            Callback(Object)
+        Object = CreateObject(model, data.coords.x, data.coords.y, data.coords.z, false, true, true)
+        if cb ~= nil then
+            cb(Object)
         end
     end)
 end

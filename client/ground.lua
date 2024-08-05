@@ -5,16 +5,18 @@
 CreateThread(function()
     while true do
         while not plyLoaded do
-            Citizen.Wait(750)
+            Wait(750)
         end
 
-        local sleepThread, player = 500, PlayerPedId();
+        local waitThread = 500
+        local player = PlayerPedId()
         local coords = GetEntityCoords(player)
 
         for i = 1, #inventory.groundItems do
             local data = inventory.groundItems[i]
             local dist = #(data.coords - coords)
-            
+     
+            -- spawns/deletes items when in distance from the player
             if dist < 50 then
                 if data.item and data.item.item and not data.prop then
                     spawnObject({
@@ -36,13 +38,12 @@ CreateThread(function()
                 end
             end
 
+            -- pushes/removes items into ground inventory when in distance
             if dist < 5 and not data.show then
                 data.show = true
                 inventory.nearItems[#inventory.nearItems+1] = data.item
             elseif dist > 5 and data.show then
                 for i, item in pairs(inventory.nearItems) do
-                    print(item.id)
-                    print(data.item.id)
                     if item.id == data.item.id then
                         inventory.nearItems[i] = nil
                         data.show = false
@@ -51,15 +52,16 @@ CreateThread(function()
             end
         end
 
+        -- only updates when inventory is open
         if inventory.open then
             SendNUIMessage({
                 type = 'setGround',
                 data = inventory.nearItems
             })
-            sleepThread = 200
+            waitThread = 200
         end
 
-        Wait(sleepThread)
+        Wait(waitThread)
     end
 end)
 
@@ -69,6 +71,8 @@ end)
 RegisterNetEvent('inventory:addClientGroundItem', function(data)
     local coords = GetEntityCoords(PlayerPedId())
     deBug(json.encode(data))
+
+    -- Adds it to inventory if nearby
     if #(data.coords - coords) < 5 then
         local slot = getEmptySlot(inventory.nearItems)
         for i, item in pairs(inventory.nearItems) do
@@ -88,6 +92,8 @@ end)
 
 -- Gets new ground items from server
 RegisterNetEvent('inventory:removeClientGroundItem', function(itemId)
+    
+    -- Removes if in nearby ground inventory
     for i, item in pairs(inventory.nearItems) do
         if item.id == itemId then
             inventory.nearItems[i] = nil
@@ -95,6 +101,7 @@ RegisterNetEvent('inventory:removeClientGroundItem', function(itemId)
         end
     end
 
+    -- Deletes prop if spawned and removes from full ground items
     for i, ground in pairs(inventory.groundItems) do
         if ground.item.id == itemId then
             if DoesEntityExist(ground.prop) then

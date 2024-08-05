@@ -38,7 +38,7 @@ const OtherInventoriesWrapper: React.FC<{ inventories: InventoryType[] }> = ({
         <>
             <div className="other-inventories">
                 {inventories.map((item, index) => (
-                    <div key={index} className="inventory-window text-center">
+                    <div key={index} className="inventory-window rounded text-center">
                         <p onClick={() => { toggleTabs(index) }}>
                             {item.label}
                         </p>

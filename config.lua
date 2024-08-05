@@ -3,7 +3,7 @@ config = {}
 config.playerInv = {
     {
         id = 'player',
-        label = "Ficka",
+        label = "Pockets",
         denied = {'key'},
         type = 'player',
         maxWeight= 50,
@@ -11,7 +11,7 @@ config.playerInv = {
     },
     {
         id = 'keys',
-        label = "Nyckelknippa",
+        label = "Keychain",
         allowed = {'key'},
         type = 'player',
         maxWeight = 50,
@@ -21,7 +21,7 @@ config.playerInv = {
 
 config.ground = {
     maxWeight = 1000,
-    label = "Marken",
+    label = "Ground",
     type = 'other',
     id = 'ground',
     slots = 18,

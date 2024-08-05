@@ -20,10 +20,10 @@ const DropSlot: React.FC<{
         }),
     });
 
-    const backgroundColor = isOver ? 'lightgreen' : '#56585d';
+    const backgroundColor = isOver ? '#6a6e79' : 'transparent';
 
     return (
-        <div ref={dropRef} style={{ backgroundColor }} className='item'>
+        <div ref={dropRef} style={{ backgroundColor }} className={' rounded '}>
             {children}
         </div>
     );
